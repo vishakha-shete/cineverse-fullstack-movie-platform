@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 
 const Homepage = () => {
   return (
-    <div className='p-5'>
+    <div>
       <Hero />
       <CardList title="Now Playing" category="now_playing" />
       <CardList title="Top Rated" category="top_rated" />

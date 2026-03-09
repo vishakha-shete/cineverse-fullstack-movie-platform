@@ -7,7 +7,7 @@ import SignUp from "./pages/SignUp";
 
 const App = () => {
   return (
-    <div className='bg-[#2c2c2c]'>
+    <div className='bg-[#1b1b1b]'>
       <Navbar />
       <Routes>
         <Route path={"/"} element={<Homepage />} />
