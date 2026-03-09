@@ -1,6 +1,7 @@
-import { Search, Menu, X } from "lucide-react";
+import { HelpCircle, LogOut, Search, Settings, Menu, X  } from "lucide-react";
 import { useState } from "react";
 import Logo from "../assets/logo.png";
+import { Link } from "react-router";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
@@ -44,9 +45,12 @@ const Navbar = () => {
                 </button>
 
                 {/* Login Button */}
+                <Link to={"/signin"}>
                 <button className="hidden md:block border border-[#333333] px-4 py-2 rounded-md hover:border-red-500 transition cursor-pointer">
                     Sign In
                 </button>
+                </Link>
+
 
                 {/* Mobile Menu Icon */}
                 <div className="xl:hidden cursor-pointer" onClick={() => setOpen(!open)}>
