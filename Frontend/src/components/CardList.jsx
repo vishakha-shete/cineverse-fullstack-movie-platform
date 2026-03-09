@@ -1,60 +1,70 @@
-import React from "react";
+import { Search, Menu, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Link } from "react-router"
 
-const CardList = () => {
+const CardList = ({ title, category }) => {
+    const [data, setData] = useState([]);
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNzNmMTE1MzdlZmU2Nzc3Y2U2NTc1NjNkNGJkZDY4OSIsIm5iZiI6MTc3MzA0NDQ5Ny4yNCwic3ViIjoiNjlhZTgzMTFlMTlmNjUxZjdjYzFjOWZmIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.qLw-WXJoDYaCVrkkQFXSLSZw0P82St9l_tYuulEB5lU'
+        }
+    };
 
-  const movies = [
-    { id: 1, title: "Avengers: Endgame", imageURL: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" },
-    { id: 2, title: "The Dark Knight", imageURL: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" },
-    { id: 3, title: "Spider-Man: No Way Home", imageURL: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" },
-    { id: 4, title: "Interstellar", imageURL: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" },
-    { id: 5, title: "Avatar", imageURL: "https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" },
-    { id: 6, title: "Inception", imageURL: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg" },
-  ];
+    useEffect(() => {
+        fetch(`https://api.themoviedb.org/3/movie/${category}`, options).then(res => res.json())
+            .then(res => setData(res.results))
+            .catch(err => console.error(err));
+    }, []);
 
-  return (
-    <div className="text-white px-4 md:px-10 mt-10">
 
-      {/* Section Title */}
-      <h2 className="text-2xl font-semibold mb-6">
-        Upcoming Movies
-      </h2>
+    return (
+        <div className="text-white px-4 md:px-10 mt-10">
 
-      {/* Swiper */}
-      <Swiper
-        spaceBetween={20}
-        slidesPerView={"auto"}
-        grabCursor={true}
-      >
-        {movies.map((item) => (
-          <SwiperSlide key={item.id} className="!w-[220px]">
+            {/* Section Title */}
+            <h2 className="text-2xl font-semibold mb-6">
+                {title}
+            </h2>
 
-            <div className="group relative rounded-xl overflow-hidden shadow-lg cursor-pointer">
+            {/* Swiper */}
+            <Swiper
+                spaceBetween={20}
+                slidesPerView={"auto"}
+                grabCursor={true}
+            >
+                {data.map((item, index) => (
+                    <SwiperSlide key={index} className="!w-[220px]">
+                        <Link to={`/movie/${item.id}`}>
 
-              {/* Movie Poster */}
-              <img
-                src={item.imageURL}
-                alt={item.title}
-                className="w-full h-[300px] object-cover transform group-hover:scale-110 transition duration-300"
-              />
+                            <div className="group relative rounded-xl overflow-hidden shadow-lg cursor-pointer">
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                                {/* Movie Poster */}
+                                <img
+                                    src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+                                    alt=""
+                                    className="w-full h-[300px] object-cover transform group-hover:scale-110 transition duration-300"
+                                />
 
-              {/* Movie Title */}
-              <p className="absolute bottom-3 left-3 right-3 text-sm font-semibold">
-                {item.title}
-              </p>
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
 
-            </div>
+                                {/* Movie Title */}
+                                <p className="absolute bottom-3 left-3 right-3 text-sm font-semibold">
+                                    {item.original_title}
+                                </p>
 
-          </SwiperSlide>
-        ))}
-      </Swiper>
+                            </div>
+                        </Link>
 
-    </div>
-  );
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+        </div>
+    );
 };
 
 export default CardList;
