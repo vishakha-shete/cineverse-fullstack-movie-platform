@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import hero from "../assets/herobg.jpg";
 
 const Hero = () => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNzNmMTE1MzdlZmU2Nzc3Y2U2NTc1NjNkNGJkZDY4OSIsIm5iZiI6MTc3MzA0NDQ5Ny4yNCwic3ViIjoiNjlhZTgzMTFlMTlmNjUxZjdjYzFjOWZmIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.qLw-WXJoDYaCVrkkQFXSLSZw0P82St9l_tYuulEB5lU'
+    }
+  };
+
+  useEffect(() => {
+    fetch('https://api.themoviedb.org/3/movie/upcoming', options)
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
+  }, [])
+
+
+
   return (
     <div className="relative w-full h-[87vh]">
 
@@ -17,7 +34,7 @@ const Hero = () => {
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-16 text-white max-w-3xl">
-        
+
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           Discover Your Next Favorite Movie
         </h1>
