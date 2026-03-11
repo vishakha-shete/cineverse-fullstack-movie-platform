@@ -4,10 +4,12 @@ import Homepage from './pages/Homepage'
 import Moviepage from "./pages/Moviepage";
 import SignIn from "./pages/SingIn";
 import SignUp from "./pages/SignUp";
+import {Toaster} from "react-hot-toast"
 
 const App = () => {
   return (
     <div className='bg-[#1b1b1b]'>
+      <Toaster />
       <Navbar />
       <Routes>
         <Route path={"/"} element={<Homepage />} />
