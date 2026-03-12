@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router'
 import { useAuthStore } from "../store/authStore";
+import { toast } from "react-hot-toast";
+
 
 const SingIn = () => {
     const navigate = useNavigate();
@@ -12,7 +14,7 @@ const SingIn = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-          const { message } = await login(username, password);
+          const {message} = await login(username, password);
           toast.success(message);
           navigate("/");
         } catch (error) {
@@ -31,6 +33,7 @@ const SingIn = () => {
         >
             <div className="max-w-112.5 w-full bg-black bg-opacity-75 rounded px-8 py-14 mx-auto mt-8">
                 <h1 className="text-3xl font-medium text-white mb-7">Sign In</h1>
+                
                 <form onSubmit={handleLogin} className="flex flex-col space-y-4">
                     <input
                         type="text"
