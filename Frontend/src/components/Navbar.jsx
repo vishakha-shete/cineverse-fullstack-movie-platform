@@ -12,7 +12,7 @@ const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false);
 
     const avatarUrl = user
-        ? `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
+        ? `https://api.dicebear.com/9.x/toon-head/svg?seed=${encodeURIComponent(
             user.username
         )}`
         : "";
@@ -59,9 +59,11 @@ const Navbar = () => {
                 </div>
 
                 {/* CTA Button */}
-                <button className="hidden md:block bg-[#e50914] px-5 py-2 text-white rounded-md hover:bg-red-600 transition cursor-pointer">
-                    Movie Picks
-                </button>
+                <Link to={user ? "ai-recommendations" : "signin"}>
+                    <button className="hidden md:block bg-[#e50914] px-5 py-2 text-white rounded-md hover:bg-red-600 transition cursor-pointer">
+                        Movie Picks
+                    </button>
+                </Link>
 
                 {/* Login Button */}
                 {!user ?
