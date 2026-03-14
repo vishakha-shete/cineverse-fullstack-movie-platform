@@ -94,7 +94,29 @@ Example:
 
     try {
 
-      result = await getAIRecommendation(userPrompt);
+      const result = await getAIRecommendation(userPrompt);
+
+      if (!result) {
+
+        toast("AI unavailable. Showing trending movies instead.");
+
+        const fallbackMovies = [
+          "Inception",
+          "Interstellar",
+          "The Dark Knight",
+          "Avengers Endgame",
+          "Spider-Man No Way Home",
+          "Joker",
+          "Parasite",
+          "The Matrix",
+          "Gladiator",
+          "Titanic",
+        ];
+
+        setRecommendation(fallbackMovies);
+        setIsLoading(false);
+        return;
+      }
 
     } catch (error) {
 
@@ -169,9 +191,7 @@ Example:
 
         <div className="w-full max-w-7xl mx-auto mt-6 px-4">
 
-          <h2 className="text-3xl font-bold text-white mb-6 text-center">
-            🤖 AI Recommended Movies
-          </h2>
+
 
           <RecommendedMovies movieTitles={recommendation} />
 
@@ -179,7 +199,7 @@ Example:
 
             <button
               onClick={resetRecommendations}
-              className="bg-[#e50914] px-6 py-3 text-white rounded-lg hover:bg-red-700 transition"
+              className="bg-[#eb252f] px-6 py-3 text-white rounded-lg hover:bg-red-700 transition"
             >
               🔁 Try Again
             </button>

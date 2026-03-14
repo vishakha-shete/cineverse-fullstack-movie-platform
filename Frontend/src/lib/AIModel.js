@@ -26,11 +26,6 @@ export async function getAIRecommendation(prompt) {
 
     } catch (error) {
 
-        if (error?.status === 429) {
-            console.log("Quota exceeded. Try again later.");
-            return null;
-        }
-
         console.log("AI Error:", error);
         return null;
     }

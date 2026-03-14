@@ -1,7 +1,7 @@
 import express from "express";
 import { connectToDB } from "./config/database.js";
 import dotenv from "dotenv";
-import User from "./models/user.model.js";
+import User from "./models/User.model.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";

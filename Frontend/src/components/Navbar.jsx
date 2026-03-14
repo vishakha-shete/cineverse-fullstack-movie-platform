@@ -42,7 +42,11 @@ const Navbar = () => {
                 <li className="hover:text-red-400 cursor-pointer transition">Movies</li>
                 <li className="hover:text-red-400 cursor-pointer transition">Popular</li>
                 <li className="hover:text-red-400 cursor-pointer transition">TV Shows</li>
-                <li className="hover:text-red-400 cursor-pointer transition">Favorites</li>
+                <li><button  className="hover:text-red-400 cursor-pointer transition "
+                    onClick={() => addFavorite(movie)}
+                >
+                    favrite❤️
+                </button></li>
             </ul>
 
             {/* Right Section */}
